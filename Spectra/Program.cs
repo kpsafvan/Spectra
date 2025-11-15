@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -12,6 +13,15 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Spectra v1"));
+    
+    // Redirect root path to Swagger UI
+    app.MapGet("/", context =>
+    {
+        context.Response.Redirect("/swagger", permanent: false);
+        return Task.CompletedTask;
+    });
 }
 
 app.UseHttpsRedirection();
