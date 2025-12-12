@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Spectra.Models;
 
 namespace Spectra.Data
 {
@@ -10,6 +11,9 @@ namespace Spectra.Data
         }
 
         public DbSet<SpectreItem> SpectreItems { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<Product> Products { get; set; }
+
     }
     public class SpectreItem
     {
