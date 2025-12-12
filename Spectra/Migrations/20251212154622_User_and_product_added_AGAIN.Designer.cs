@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Spectra.Data;
 
@@ -10,9 +11,11 @@ using Spectra.Data;
 namespace Spectra.Migrations
 {
     [DbContext(typeof(SpectreDbContext))]
-    partial class SpectreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251212154622_User_and_product_added_AGAIN")]
+    partial class User_and_product_added_AGAIN
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
