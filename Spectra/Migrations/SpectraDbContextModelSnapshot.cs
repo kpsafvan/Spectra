@@ -9,8 +9,8 @@ using Spectra.Data;
 
 namespace Spectra.Migrations
 {
-    [DbContext(typeof(SpectreDbContext))]
-    partial class SpectreDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SpectraDbContext))]
+    partial class SpectraDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace Spectra.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Spectra.Data.SpectreItem", b =>
+            modelBuilder.Entity("Spectra.Data.SpectraItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,7 +39,7 @@ namespace Spectra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SpectreItems");
+                    b.ToTable("SpectraItems");
                 });
 
             modelBuilder.Entity("Spectra.Models.Product", b =>

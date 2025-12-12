@@ -10,7 +10,7 @@ using Spectra.Data;
 
 namespace Spectra.Migrations
 {
-    [DbContext(typeof(SpectreDbContext))]
+    [DbContext(typeof(SpectraDbContext))]
     [Migration("20251212040302_Remove-Id-ongenadd")]
     partial class RemoveIdongenadd
     {

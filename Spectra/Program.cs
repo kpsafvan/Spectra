@@ -4,7 +4,7 @@ using Spectra.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Database Context
-builder.Services.AddDbContext<SpectreDbContext>(options =>
+builder.Services.AddDbContext<SpectraDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.

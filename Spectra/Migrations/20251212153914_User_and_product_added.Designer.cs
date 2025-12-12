@@ -10,8 +10,8 @@ using Spectra.Data;
 
 namespace Spectra.Migrations
 {
-    [DbContext(typeof(SpectreDbContext))]
-    [Migration("20251212153914_User_and_product_added")]
+    [DbContext(typeof(SpectraDbContext))]
+    [Migration("20251212153914  _User_and_product_added")]
     partial class User_and_product_added
     {
         /// <inheritdoc />
