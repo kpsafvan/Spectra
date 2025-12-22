@@ -10,7 +10,7 @@ using Spectra.Data;
 
 namespace Spectra.Migrations
 {
-    [DbContext(typeof(SpectreDbContext))]
+    [DbContext(typeof(SpectraDbContext))]
     [Migration("20251212154622_User_and_product_added_AGAIN")]
     partial class User_and_product_added_AGAIN
     {
