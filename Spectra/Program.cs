@@ -1,11 +1,21 @@
 using Microsoft.EntityFrameworkCore;
 using Spectra.Data;
+using Spectra.Mappings;
+using Spectra.Models;
+using Spectra.Models.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Database Context
 builder.Services.AddDbContext<SpectraDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Add AutoMapper - Scans assembly for Profile classes
+// This is registered once and used throughout the app
+builder.Services.AddAutoMapper(config =>
+{
+    config.AddProfile<MappingProfile>();
+});
 
 // Add services to the container.
 builder.Services.AddControllers();

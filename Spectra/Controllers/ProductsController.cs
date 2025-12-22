@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Spectra.Data;
 using Spectra.Models;
+using Spectra.Models.DTOs;
 using System.Threading.Tasks;
 
 namespace Spectra.Controllers
@@ -11,22 +13,37 @@ namespace Spectra.Controllers
     public class ProductsController : Controller
     {
         private readonly SpectraDbContext _spectraContext;
+        private readonly IMapper _mapper;
 
-        public ProductsController(SpectraDbContext spectraDbContextContext)
+        public ProductsController(SpectraDbContext spectraDbContextContext,IMapper mapper)
         {
             _spectraContext = spectraDbContextContext;
+            _mapper = mapper;
         }
         // GET: Products
         [HttpGet(Name = "GetProducts")]
         public async Task<IActionResult> Index()
         {
-            return Ok(await _spectraContext.Products.ToListAsync());
+            var products = await _spectraContext.Products.ToListAsync();
+            var productDtos = _mapper.Map<List<ProductDto>>(products);
+
+            return Ok(productDtos);
         }
 
         [HttpGet("{id}", Name = "GetProductsByID")]
         public async Task<IActionResult> FindByID(int Id)
         {
-            return Ok(await _spectraContext.Products.FindAsync(Id));
+            var product = await _spectraContext.Products.FindAsync(Id);
+
+            if (product == null)
+            {
+                return NotFound("Product not found.");
+            }
+
+            var productDto = _mapper.Map<ProductDto>(product);
+
+            return Ok(productDto);
+
         }
 
         [HttpPost(Name = "CreateProduct")]
