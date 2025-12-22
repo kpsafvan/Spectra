@@ -42,18 +42,41 @@ namespace Spectra.Controllers
         }
 
         [HttpPut("{id}",Name = "UpdateProduct")]
-        public async Task<IActionResult> Update([FromBody] Product product)
+        public async Task<IActionResult> Update(int id,[FromBody] Product product)
         {
             if (product == null)
             {
                 return BadRequest("Product is required.");
             }
-            var prod = await _spectraContext.Products.FindAsync(product.Id);
+            var prod = await _spectraContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+
             prod.Name = product.Name;
             prod.Price = product.Price;
-            _spectraContext.Products.Update(product);
+
+            _spectraContext.Products.Update(prod);
             await _spectraContext.SaveChangesAsync();
-            return (IActionResult)_spectraContext.Products.Find(product.Id);
+
+            return Ok(prod);
+        }
+
+        [HttpDelete("{id}", Name = "DeleteProduct")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id == null)
+            {
+                return BadRequest("Id is required.");
+            }
+            var prod = await _spectraContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+
+            if(prod == null)
+            {
+                return NotFound("Product not found.");
+            }
+
+            _spectraContext.Products.Remove(prod);
+            await _spectraContext.SaveChangesAsync();
+
+            return Ok(prod + "\n Was removed");
         }
     }
 }
